@@ -7,6 +7,7 @@ export default class Map extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+    this.handleDragEnd = this.handleDragEnd.bind(this)
   }
 
   componentWillMount() {
@@ -28,6 +29,12 @@ export default class Map extends Component {
         })
       }
     )
+  }
+
+  handleDragEnd(event) {
+    const {onDestinationSelect} = this.props
+    const {coordinate: {longitude, latitude}} = event.nativeEvent
+    onDestinationSelect(latitude, longitude)
   }
 
   componentWillUnmount() {
@@ -57,6 +64,7 @@ export default class Map extends Component {
             <MapView.Marker
             draggable
             coordinate={{...destination}}
+            onDragEnd	={this.handleDragEnd}
             />
           )
           : null

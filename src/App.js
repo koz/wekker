@@ -33,6 +33,7 @@ export default class App extends Component {
         />
         <Map
           destination={destination}
+          onDestinationSelect={this.setDestination}
         />
       </View>
     )
