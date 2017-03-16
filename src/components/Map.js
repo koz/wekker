@@ -51,6 +51,16 @@ export default class Map extends Component {
           longitudeDelta: 0,
         }}
       >
+        {
+          destination
+          ? (
+            <MapView.Marker
+            draggable
+            coordinate={{...destination}}
+            />
+          )
+          : null
+        }
       </MapView>
     )
   }
