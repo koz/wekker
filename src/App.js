@@ -9,11 +9,31 @@ import {
 } from 'react-native'
 
 export default class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+    this.setDestination = this.setDestination.bind(this)
+  }
+
+  setDestination(lat, lng) {
+    this.setState({
+      destination: {
+        latitude: lat,
+        longitude: lng,
+      },
+    })
+  }
+
   render() {
+    const {destination} = this.state
     return (
       <View style={styles.container}>
-        <PlacesAutocomplete />
-        <Map />
+        <PlacesAutocomplete
+          onDestinationSelect={this.setDestination}
+        />
+        <Map
+          destination={destination}
+        />
       </View>
     )
   }

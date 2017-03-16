@@ -35,10 +35,11 @@ export default class Map extends Component {
   }
 
   render() {
+    const {destination} = this.props
     const {initialPosition, lastPosition} = this.state
     const initialCoords = initialPosition ? initialPosition.coords : null
     const lastCoords = lastPosition ? lastPosition.coords : null
-    const coords = lastCoords || initialCoords
+    const coords = destination || (lastCoords || initialCoords)
     const {latitude, longitude} = coords || {}
     return (
       <MapView
