@@ -7,6 +7,7 @@ export default class Map extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+    this.handleDragEnd = this.handleDragEnd.bind(this)
   }
 
   componentWillMount() {
@@ -30,16 +31,23 @@ export default class Map extends Component {
     )
   }
 
+  handleDragEnd(event) {
+    const {onDestinationSelect} = this.props
+    const {coordinate: {longitude, latitude}} = event.nativeEvent
+    onDestinationSelect(latitude, longitude)
+  }
+
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID)
   }
 
   render() {
+    const {destination} = this.props
     const {initialPosition, lastPosition} = this.state
     const initialCoords = initialPosition ? initialPosition.coords : null
     const lastCoords = lastPosition ? lastPosition.coords : null
-    const coords = lastCoords || initialCoords
-    const {latitude, longitude} = coords || {}
+    const address = destination || (lastCoords || initialCoords)
+    const {latitude, longitude} = address || {}
     return (
       <MapView
         style={styles.map}
@@ -50,6 +58,17 @@ export default class Map extends Component {
           longitudeDelta: 0,
         }}
       >
+        {
+          address
+          ? (
+            <MapView.Marker
+            draggable
+            coordinate={{...address}}
+            onDragEnd	={this.handleDragEnd}
+            />
+          )
+          : null
+        }
       </MapView>
     )
   }
