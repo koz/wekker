@@ -46,8 +46,8 @@ export default class Map extends Component {
     const {initialPosition, lastPosition} = this.state
     const initialCoords = initialPosition ? initialPosition.coords : null
     const lastCoords = lastPosition ? lastPosition.coords : null
-    const coords = destination || (lastCoords || initialCoords)
-    const {latitude, longitude} = coords || {}
+    const address = destination || (lastCoords || initialCoords)
+    const {latitude, longitude} = address || {}
     return (
       <MapView
         style={styles.map}
@@ -59,11 +59,11 @@ export default class Map extends Component {
         }}
       >
         {
-          destination
+          address
           ? (
             <MapView.Marker
             draggable
-            coordinate={{...destination}}
+            coordinate={{...address}}
             onDragEnd	={this.handleDragEnd}
             />
           )

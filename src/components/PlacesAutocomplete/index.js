@@ -12,7 +12,6 @@ class PlacesAutocomplete extends Component {
     super(props)
     this.openSearchModal = this.openSearchModal.bind(this)
     this.handlePress = this.handlePress.bind(this)
-    this.state = {}
   }
 
   openSearchModal() {
@@ -27,28 +26,19 @@ class PlacesAutocomplete extends Component {
     .then((place) => {
       const {address, latitude, longitude} = place
       const {onDestinationSelect} = this.props
-
-      this.setState({
-        destination: {
-          address,
-          latitude,
-          longitude,
-        },
-      })
-      onDestinationSelect(latitude, longitude)
+      onDestinationSelect(latitude, longitude, address)
     })
   }
 
   render() {
-    const {onDestinationSelect} = this.props
-    const {destination} = this.state
-    const destinationAddress = destination ? destination.address : null
+    const {onDestinationSelect, destination} = this.props
+    const address = destination ? destination.address : null
     return (
       <View
         style={styles.container}
       >
         <PickAddress
-          address={destinationAddress}
+          address={address}
           handlePress={this.handlePress}
           placeholder={'Endereço de Destino'}
         />
