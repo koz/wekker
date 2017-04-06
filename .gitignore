@@ -54,3 +54,6 @@ fastlane/screenshots
 
 # VSCODE
 .vscode
+
+# YARN
+yarn.lock
