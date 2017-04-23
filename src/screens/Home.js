@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import Map from './components/Map'
-import PlacesAutocomplete from './components/PlacesAutocomplete'
+import Map from '../components/Map'
+import PlacesAutocomplete from '../components/PlacesAutocomplete'
 import axios from 'axios'
 
 import {
@@ -11,7 +11,10 @@ import {
 
 const API_KEY = 'AIzaSyAnk9dToeoLZPY67jfYfh_1nt1cGfYZGCs'
 
-export default class App extends Component {
+export default class Home extends Component {
+  static navigationOptions = {
+    title: 'Weeker',
+  }
   constructor(props) {
     super(props)
     this.state = {}
