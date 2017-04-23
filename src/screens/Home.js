@@ -6,7 +6,8 @@ import axios from 'axios'
 import {
   AppRegistry,
   StyleSheet,
-  View
+  View,
+  Button,
 } from 'react-native'
 
 const API_KEY = 'AIzaSyAnk9dToeoLZPY67jfYfh_1nt1cGfYZGCs'
@@ -59,6 +60,11 @@ export default class Home extends Component {
           destination={destination}
           onDestinationSelect={this.setDestination}
         />
+        <Button
+          title="Ativar alarme"
+          onPress={() => console.log('alarm')}
+          accessibilityLabel="Ativar alarme"
+        />
       </View>
     )
   }
@@ -71,6 +77,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
+    paddingBottom: 40,
   },
 })
