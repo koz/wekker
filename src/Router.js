@@ -8,6 +8,14 @@ const Weeker = TabNavigator({
   Settings: {screen: Settings},
 }, {
   tabBarPosition: 'bottom',
+  tabBarOptions: {
+    style: {
+      backgroundColor: 'white'
+    },
+    labelStyle: {
+      color: 'black',
+    },
+  }
 })
 
 export default Weeker
