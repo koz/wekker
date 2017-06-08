@@ -15,6 +15,7 @@ const API_KEY = 'AIzaSyAnk9dToeoLZPY67jfYfh_1nt1cGfYZGCs'
 export default class Home extends Component {
   static navigationOptions = {
     header: null,
+    title: 'Início',
   }
   constructor(props) {
     super(props)

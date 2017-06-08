@@ -11,7 +11,7 @@ import LocationsSettings from './LocationsSettings'
 
 class GeneralSettings extends Component {
   static navigationOptions = {
-    title: 'Configurações',
+    title: 'Config',
   }
   render() {
     return (
