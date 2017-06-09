@@ -1,4 +1,4 @@
-package com.mapproject;
+package com.weeker;
 
 import android.app.Application;
 
