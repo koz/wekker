@@ -1,5 +1,7 @@
-import { TabNavigator } from 'react-navigation'
-// import Home from './screens/Home'
+import {
+  TabNavigator,
+  TabBarBottom
+} from 'react-navigation'
 import Settings from './screens/Settings'
 import HomeRouter from './HomeRouter'
 
@@ -7,6 +9,7 @@ const Weeker = TabNavigator({
   Home: {screen: HomeRouter},
   Settings: {screen: Settings},
 }, {
+  tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   tabBarOptions: {
     style: {
@@ -15,6 +18,8 @@ const Weeker = TabNavigator({
     labelStyle: {
       color: 'black',
     },
+    showIcon: true,
+    showLabel: false,
   }
 })
 
