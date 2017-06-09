@@ -4,11 +4,15 @@ import {
   Button,
   Image,
   StyleSheet,
+  Text,
 } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import RadiusSettings from './RadiusSettings'
 import SoundSettings from './SoundSettings'
 import LocationsSettings from './LocationsSettings'
+import {
+  MKButton,
+} from 'react-native-material-kit';
 
 import icon from '../assets/settings.png'
 
@@ -25,19 +29,27 @@ class GeneralSettings extends Component {
   }
   render() {
     return (
-      <View>
-        <Button
-          title="Definir localizações"
+      <View style={styles.container}>
+        <MKButton
           onPress={() => this.props.navigation.navigate('Locations')}
-        />
-        <Button
-          title="Raio do alarme"
+          style={{
+            backgroundColor: 'fff',
+          }}
+          >
+          <Text pointerEvents="none"
+                style={{color: '#333333', fontWeight: 'bold',}}>
+            Definir destinos
+          </Text>
+        </MKButton>
+        <MKButton
+          backgroundColor="#fff"
           onPress={() => this.props.navigation.navigate('Radius')}
-        />
-        <Button
-          title="Som"
-          onPress={() => this.props.navigation.navigate('Sound')}
-        />
+          >
+          <Text pointerEvents="none"
+                style={{color: '#333333', fontWeight: 'bold',}}>
+            Raio de alarme
+          </Text>
+        </MKButton>
       </View>
     )
   }
@@ -51,6 +63,12 @@ const Settings = StackNavigator({
 })
 
 const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    paddingTop: 20,
+    backgroundColor: '#FFFFFF',
+    paddingBottom: 40,
+  },
   icon: {
     width: 26,
     height: 26,
