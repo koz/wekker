@@ -19,7 +19,15 @@ import icon from '../assets/settings.png'
 
 class GeneralSettings extends Component {
   static navigationOptions = {
-    title: 'Config',
+    header: () => (
+      <View style={{backgroundColor: 'white', padding: 30}}>
+        <View style={{borderBottomWidth: 1, borderColor: '#ccc'}}>
+          <Text style={{fontSize: 28, color: 'black', marginBottom: 20, fontWeight: 'bold'}}>
+            Configurações
+          </Text>
+        </View>
+      </View>
+    ),
     tabBarIcon: (focused, tintColor) => (
       <Image
         source={icon}
@@ -30,26 +38,26 @@ class GeneralSettings extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <MKButton
-          onPress={() => this.props.navigation.navigate('Locations')}
-          style={{
-            backgroundColor: 'fff',
-          }}
-          >
-          <Text pointerEvents="none"
-                style={{color: '#333333', fontWeight: 'bold',}}>
-            Definir destinos
-          </Text>
-        </MKButton>
-        <MKButton
-          backgroundColor="#fff"
-          onPress={() => this.props.navigation.navigate('Radius')}
-          >
-          <Text pointerEvents="none"
-                style={{color: '#333333', fontWeight: 'bold',}}>
-            Raio de alarme
-          </Text>
-        </MKButton>
+        <View style={styles.buttonContainer}>
+          <MKButton
+            onPress={() => this.props.navigation.navigate('Locations')}
+            >
+            <Text pointerEvents="none"
+                  style={{color: '#333333', fontSize: 24, marginBottom: 20}}>
+              Definir destinos
+            </Text>
+          </MKButton>
+        </View>
+        <View style={styles.buttonContainer}>
+          <MKButton
+            onPress={() => this.props.navigation.navigate('Radius')}
+            >
+            <Text pointerEvents="none"
+                  style={{color: '#333333', fontSize: 24, marginBottom: 20}}>
+              Raio de alarme
+            </Text>
+          </MKButton>
+        </View>
       </View>
     )
   }
@@ -68,6 +76,11 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     backgroundColor: '#FFFFFF',
     paddingBottom: 40,
+  },
+  buttonContainer: {
+    margin: 30,
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
   },
   icon: {
     width: 26,
