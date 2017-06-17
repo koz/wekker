@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import MapView from 'react-native-maps'
+import {MapView, Location, Permissions} from 'expo'
 
 import {StyleSheet} from 'react-native'
 
@@ -10,25 +10,30 @@ export default class Map extends Component {
     this.handleDragEnd = this.handleDragEnd.bind(this)
   }
 
-  componentWillMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({
-          initialPosition: position,
-        })
-      },
-      (error) => {
-        alert(JSON.stringify(error))
-      }
-    )
+  getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      return null
+    }
 
-    this.watchID = navigator.geolocation.watchPosition(
-      (position) => {
-        this.setState({
-          lastPosition: position,
-        })
-      }
-    )
+    return Location.getCurrentPositionAsync({});
+  }
+
+  async componentWillMount() {
+    const initialPosition = await this.getLocationAsync()
+    if (initialPosition) {
+      this.setState({initialPosition})
+    } else {
+      this.setState({
+        error: 'Permission not granted'
+      })
+    }
+
+    this.watcher = await Location.watchPositionAsync({}, (position) => {
+      this.setState({
+        lastPosition: position,
+      })
+    })
   }
 
   handleDragEnd(event) {
@@ -38,7 +43,7 @@ export default class Map extends Component {
   }
 
   componentWillUnmount() {
-    navigator.geolocation.clearWatch(this.watchID)
+    this.watcher.remove()
   }
 
   render() {
