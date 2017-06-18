@@ -2,11 +2,14 @@ import React, {Component} from 'react'
 import Map from '../components/Map'
 import PlacesAutocomplete from '../components/PlacesAutocomplete'
 import axios from 'axios'
+import icon from '../assets/home.png'
 
 import {
   AppRegistry,
   StyleSheet,
-  View
+  View,
+  Button,
+  Image,
 } from 'react-native'
 
 const API_KEY = 'AIzaSyAnk9dToeoLZPY67jfYfh_1nt1cGfYZGCs'
@@ -14,7 +17,14 @@ const API_KEY = 'AIzaSyAnk9dToeoLZPY67jfYfh_1nt1cGfYZGCs'
 export default class Home extends Component {
   static navigationOptions = {
     header: null,
+    tabBarIcon: (focused, tintColor) => (
+      <Image
+        source={icon}
+        style={styles.icon}
+      />
+    )
   }
+
   constructor(props) {
     super(props)
     this.state = {}
@@ -59,6 +69,11 @@ export default class Home extends Component {
           destination={destination}
           onDestinationSelect={this.setDestination}
         />
+        <Button
+          title="Ativar alarme"
+          onPress={() => console.log('alarm')}
+          accessibilityLabel="Ativar alarme"
+        />
       </View>
     )
   }
@@ -71,6 +86,12 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
+    paddingBottom: 40,
+  },
+  icon: {
+    width: 26,
+    height: 26,
   },
 })
