@@ -10,9 +10,6 @@ import { StackNavigator } from 'react-navigation'
 import RadiusSettings from './RadiusSettings'
 import SoundSettings from './SoundSettings'
 import LocationsSettings from './LocationsSettings'
-import {
-  MKButton,
-} from 'react-native-material-kit';
 
 import icon from '../assets/settings.png'
 
@@ -39,24 +36,16 @@ class GeneralSettings extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.buttonContainer}>
-          <MKButton
+          <Button
             onPress={() => this.props.navigation.navigate('Locations')}
-            >
-            <Text pointerEvents="none"
-                  style={{color: '#333333', fontSize: 24, marginBottom: 20}}>
-              Definir destinos
-            </Text>
-          </MKButton>
+            title="Definir destinos"
+          />
         </View>
         <View style={styles.buttonContainer}>
-          <MKButton
+          <Button
             onPress={() => this.props.navigation.navigate('Radius')}
-            >
-            <Text pointerEvents="none"
-                  style={{color: '#333333', fontSize: 24, marginBottom: 20}}>
-              Raio de alarme
-            </Text>
-          </MKButton>
+            title="Raio de alarme"
+          />
         </View>
       </View>
     )
