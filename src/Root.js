@@ -1,6 +1,7 @@
 import React from 'react'
-import {createStore, combineReducers} from 'redux'
+import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
+import logger from 'redux-logger'
 import AppNavigator from './Router'
 import reducer from './redux/reducer'
 import AppWithNavigationState from './App'
@@ -23,7 +24,8 @@ const Root = () => {
     nav: navReducer,
     wekker: reducer,
   });
-  const store = createStore(appReducer)
+  const store = createStore(appReducer, __DEV__ ? applyMiddleware(logger) : null)
+
   return (
     <Provider store={store}>
       <AppWithNavigationState />
