@@ -11,21 +11,21 @@ import {
   Text
 } from 'react-native'
 
+const {router} = AppNavigator
+const initialState = router.getStateForAction(router.getActionForPathAndParams('Home'))
+
+const navReducer = (state = initialState, action) => {
+  const nextState = router.getStateForAction(action, state)
+
+  return nextState || state
+}
+const appReducer = combineReducers({
+  nav: navReducer,
+  wekker: reducer,
+});
+const store = createStore(appReducer, __DEV__ ? applyMiddleware(logger) : null)
+
 const Root = () => {
-  const {router} = AppNavigator
-  const initialState = router.getStateForAction(router.getActionForPathAndParams('Home'))
-
-  const navReducer = (state = initialState, action) => {
-    const nextState = router.getStateForAction(action, state)
-
-    return nextState || state
-  }
-  const appReducer = combineReducers({
-    nav: navReducer,
-    wekker: reducer,
-  });
-  const store = createStore(appReducer, __DEV__ ? applyMiddleware(logger) : null)
-
   return (
     <Provider store={store}>
       <AppWithNavigationState />
