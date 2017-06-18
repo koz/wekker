@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   wrapper: {
     borderBottomWidth: 1,
     borderColor: '#CCC',
-    paddingTop: 30,
+    paddingTop: 50,
     paddingBottom: 30,
     marginLeft: 30,
     marginRight: 30
