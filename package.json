@@ -1,5 +1,5 @@
 {
-  "name": "Weeker",
+  "name": "weeker",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,11 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@expo/vector-icons": "~4.0.0",
     "axios": "^0.15.3",
-    "react": "~15.4.1",
-    "react-native": "0.42.0",
-    "react-native-google-places": "^2.0.9",
-    "react-native-maps": "^0.12.4",
+    "expo": "~15.0.0",
+    "react": "~15.4.2",
+    "react-native": "github:exponent/react-native#sdk-14.0.0",
+    "react-native-google-places-autocomplete": "^1.2.12",
     "react-navigation": "^1.0.0-beta.7"
   },
   "devDependencies": {
@@ -22,5 +23,6 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "main": "main.js"
 }

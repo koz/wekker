@@ -11,23 +11,11 @@ class PlacesAutocomplete extends Component {
   constructor(props) {
     super(props)
     this.openSearchModal = this.openSearchModal.bind(this)
-    this.handlePress = this.handlePress.bind(this)
   }
 
   openSearchModal() {
-    return RNGooglePlaces.openAutocompleteModal({
-      country: 'BR'
-    })
-    .catch(error => alert(error.message))
-  }
-
-  handlePress() {
-    this.openSearchModal()
-    .then((place) => {
-      const {address, latitude, longitude} = place
-      const {onDestinationSelect} = this.props
-      onDestinationSelect(latitude, longitude, address)
-    })
+    const {navigate} = this.props
+    navigate('Autocomplete')
   }
 
   render() {
@@ -39,7 +27,7 @@ class PlacesAutocomplete extends Component {
       >
         <PickAddress
           address={address}
-          handlePress={this.handlePress}
+          handlePress={this.openSearchModal}
           placeholder={'Endereço de Destino'}
         />
       </View>

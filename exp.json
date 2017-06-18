@@ -1,0 +1,26 @@
+{
+  "name": "Weeker",
+  "description": "App to use alarms to wake up before a destination",
+  "slug": "weeker",
+  "sdkVersion": "14.0.0",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "primaryColor": "#cccccc",
+  "icon": "https://s3.amazonaws.com/exp-icon-assets/ExpoEmptyManifest_192.png",
+  "loading": {
+    "icon": "https://s3.amazonaws.com/exp-icon-assets/ExpoEmptyManifest_192.png",
+    "hideExponentText": false
+  },
+  "packagerOpts": {
+    "assetExts": [
+      "ttf"
+    ]
+  },
+  "android": {
+    "config": {
+      "googleMaps": {
+        "apiKey": "AIzaSyAnk9dToeoLZPY67jfYfh_1nt1cGfYZGCs"
+      }
+    }
+  }
+}
