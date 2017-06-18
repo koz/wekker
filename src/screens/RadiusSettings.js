@@ -1,18 +1,19 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import Slider from 'react-native-slider'
+import Button from '../components/Button'
 import {
   View,
   Text,
+  Image,
   StyleSheet,
-  Button,
 } from 'react-native'
-import Slider from 'react-native-slider'
 
 class RadiusSettings extends Component {
   static navigationOptions = {
     title: 'Raio de Alarme',
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       value: 500,
@@ -23,23 +24,32 @@ class RadiusSettings extends Component {
     this.setState({value})
   }
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
-        <Slider
-          value={this.state.value}
-          maximumValue={2000}
-          minimumValue={500}
-          step={100}
-          onValueChange={this.handleSlide}
-          style={styles.slider}
-          trackStyle={styles.track}
-          thumbStyle={styles.thumb}
-          minimumTrackTintColor='#d14ba6'
+        <Image
+          style={styles.image}
+          source={require('../assets/radar.png')}
         />
-        <Text style={styles.text}>
-          {`${this.state.value} m`}
-        </Text>
+        <View style={styles.sliderWrapper}>
+          <Slider
+            value={this.state.value}
+            maximumValue={2000}
+            minimumValue={500}
+            step={100}
+            onValueChange={this.handleSlide}
+            style={styles.slider}
+            trackStyle={styles.track}
+            thumbStyle={styles.thumb}
+            minimumTrackTintColor='#9986FC'
+          />
+          <Text style={styles.text}>
+            {`${this.state.value} m`}
+          </Text>
+        </View>
+        <Button onPress={() => {}}>
+          Confirmar
+        </Button>
       </View>
     )
   }
@@ -49,40 +59,41 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     flex: 1,
-    paddingTop: 20,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
-    paddingBottom: 40,
+    paddingTop: 72,
     paddingLeft: 20,
     paddingRight: 20,
+    paddingBottom: 40,
+    position: 'relative',
+    backgroundColor: '#FFFFFF',
+  },
+  image: {
+    width: 200,
+    height: 200,
+    alignSelf: 'center',
+    marginBottom: 34,
+  },
+  sliderWrapper: {
+    flex: 1,
+  },
+  slider: {
+    marginBottom: 36,
   },
   track: {
     height: 10,
     borderRadius: 4,
-    backgroundColor: '#ADD8E6',
-    shadowColor: 'black',
-    shadowOffset: {width: 0, height: 1},
-    shadowRadius: 1,
-    shadowOpacity: 0.15,
+    backgroundColor: '#E3EAFA',
   },
   thumb: {
-    width: 20,
-    height: 20,
-    backgroundColor: '#f8a1d6',
-    borderColor: '#a4126e',
-    borderWidth: 5,
-    borderRadius: 10,
-    shadowColor: 'black',
-    shadowOffset: {width: 0, height: 2},
-    shadowRadius: 2,
-    shadowOpacity: 0.35,
-    top: 25,
+    width: 40,
+    height: 40,
+    bottom: 0,
+    borderRadius: 20,
+    backgroundColor: '#9986FC',
   },
   text: {
+    fontSize: 26,
     alignSelf: 'center',
-    fontSize: 20,
-  }
+  },
 })
 
 
