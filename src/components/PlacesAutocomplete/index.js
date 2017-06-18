@@ -5,7 +5,6 @@ import {
   Text,
 } from 'react-native'
 import PickAddress from './PickAddress'
-import RNGooglePlaces from 'react-native-google-places'
 
 class PlacesAutocomplete extends Component {
   constructor(props) {
