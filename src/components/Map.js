@@ -3,6 +3,94 @@ import {MapView, Location, Permissions} from 'expo'
 
 import {StyleSheet} from 'react-native'
 
+const mapStyle = [
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.neighborhood",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "stylers": [
+      {
+        "color": "#fffefe"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  }
+]
+
 export default class Map extends Component {
   constructor(props) {
     super(props)
@@ -55,6 +143,7 @@ export default class Map extends Component {
     const {latitude, longitude} = address || {}
     return (
       <MapView
+        customMapStyle={mapStyle}
         style={styles.map}
         region={{
           latitude: latitude || 37.78825,
