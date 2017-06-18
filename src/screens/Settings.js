@@ -11,6 +11,7 @@ import { StackNavigator } from 'react-navigation'
 import RadiusSettings from './RadiusSettings'
 import SoundSettings from './SoundSettings'
 import LocationsSettings from './LocationsSettings'
+import Title from '../components/Title'
 
 import settingsIcon from '../assets/settings.png'
 import arrowIcon from '../assets/arrow.png'
@@ -20,11 +21,7 @@ import icon from '../assets/settings.png'
 class GeneralSettings extends Component {
   static navigationOptions = {
     header: () => (
-      <View style={styles.headerWrapper}>
-        <Text style={styles.headerTitle}>
-          Configurações
-        </Text>
-      </View>
+      <Title text={'Configurações'} />
     ),
     tabBarIcon: (focused, tintColor) => (
       <Image
@@ -103,17 +100,6 @@ const Settings = StackNavigator({
 })
 
 const styles = StyleSheet.create({
-  headerWrapper: {
-    borderBottomWidth: 1,
-    borderColor: '#CCC',
-    backgroundColor: '#FFF',
-    padding: 30
-  },
-  headerTitle: {
-    fontSize: 28,
-    color: 'black',
-    fontWeight: 'bold'
-  },
   container: {
     ...StyleSheet.absoluteFillObject,
     paddingTop: 20,
