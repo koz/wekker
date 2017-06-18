@@ -67,9 +67,9 @@ export default class Map extends Component {
           address
           ? (
             <MapView.Marker
-            draggable
-            coordinate={{...address}}
-            onDragEnd	={this.handleDragEnd}
+              draggable
+              coordinate={{...address}}
+              onDragEnd	={this.handleDragEnd}
             />
           )
           : null

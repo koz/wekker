@@ -13,7 +13,7 @@ const API_KEY = 'AIzaSyAnk9dToeoLZPY67jfYfh_1nt1cGfYZGCs'
 
 export default class Home extends Component {
   static navigationOptions = {
-    title: 'Weeker',
+    header: null,
   }
   constructor(props) {
     super(props)
@@ -47,10 +47,12 @@ export default class Home extends Component {
 
   render() {
     const {destination} = this.state
+    const {navigation: {navigate}} = this.props
     return (
       <View style={styles.container}>
         <PlacesAutocomplete
           destination={destination}
+          navigate={navigate}
           onDestinationSelect={this.setDestination}
         />
         <Map
