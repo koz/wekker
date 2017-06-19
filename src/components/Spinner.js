@@ -16,7 +16,7 @@ export default class Spinner extends React.Component {
       this.state.spinValue,
       {
         toValue: 100,
-        duration: 10000,
+        duration: 5000,
         easing: Easing.linear
       }
     ).start(event => {
