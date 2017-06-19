@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Map from '../components/Map'
-import PlacesAutocomplete from '../components/PlacesAutocomplete'
+import DestinationSelect from '../components/DestinationSelect'
 import axios from 'axios'
 import icon from '../assets/home.png'
 
@@ -60,7 +60,7 @@ export default class Home extends Component {
     const {navigation: {navigate}} = this.props
     return (
       <View style={styles.container}>
-        <PlacesAutocomplete
+        <DestinationSelect
           destination={destination}
           navigate={navigate}
           onDestinationSelect={this.setDestination}

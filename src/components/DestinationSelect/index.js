@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {
   View,
-  TouchableOpacity,
-  Text,
+  StyleSheet,
 } from 'react-native'
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 import PickAddress from './PickAddress'
 
 class PlacesAutocomplete extends Component {
@@ -14,11 +14,15 @@ class PlacesAutocomplete extends Component {
 
   openSearchModal() {
     const {navigate} = this.props
-    navigate('Autocomplete')
+    navigate('Autocomplete', {
+      handleSelect: (data, details) => {
+        console.log(data, details)
+      },
+    })
   }
 
   render() {
-    const {onDestinationSelect, destination} = this.props
+    const {onDestinationSelect, destination, navigate} = this.props
     const address = destination ? destination.address : null
     return (
       <View
@@ -27,18 +31,18 @@ class PlacesAutocomplete extends Component {
         <PickAddress
           address={address}
           handlePress={this.openSearchModal}
-          placeholder={'Endereço de Destino'}
+          placeholder='Endereço de Destino'
         />
       </View>
     )
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     zIndex: 10,
     padding: 10,
   },
-}
+})
 
 export default PlacesAutocomplete
