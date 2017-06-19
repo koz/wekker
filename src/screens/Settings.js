@@ -49,9 +49,9 @@ class GeneralSettings extends Component {
               style={styles.switch}
               value={this.state.isActive}
               onValueChange={this.handleNotificationsChange}
-              tintColor={'#9986fc'}
-              thumbTintColor={'#FF9000'}
-              onTintColor={'#999999'}
+              tintColor={'#9986FC'}
+              thumbTintColor={'#FFFFFF'}
+              onTintColor={'#9986FC'}
             />
           </View>
         </View>
@@ -140,7 +140,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   switch: {
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
+    backgroundColor: '#898989',
+    borderRadius: 15,
   }
 })
 
