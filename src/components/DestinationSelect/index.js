@@ -50,8 +50,10 @@ const styles = StyleSheet.create({
   },
 })
 
+const mapStateToProps = ({wekker: {destination}}) => ({destination})
+
 const mapDispatchToProps = dispatch => ({
   addDestination: (lat, lng, address) => dispatch(addDestination(lat, lng, address)),
 })
 
-export default connect(null, mapDispatchToProps)(PlacesAutocomplete)
+export default connect(mapStateToProps, mapDispatchToProps)(PlacesAutocomplete)
