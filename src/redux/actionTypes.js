@@ -1,0 +1,1 @@
+export const SET_DESTINATION = 'SET_DESTINATION'

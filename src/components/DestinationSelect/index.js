@@ -5,6 +5,8 @@ import {
 } from 'react-native'
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 import PickAddress from './PickAddress'
+import {connect} from 'react-redux'
+import {addDestination} from '../../redux/actions'
 
 class PlacesAutocomplete extends Component {
   constructor(props) {
@@ -13,10 +15,13 @@ class PlacesAutocomplete extends Component {
   }
 
   openSearchModal() {
-    const {navigate} = this.props
+    const {navigate, addDestination} = this.props
     navigate('Autocomplete', {
       handleSelect: (data, details) => {
-        console.log(data, details)
+        const {formatted_address: address, geometry} = details || {}
+        const {location} = geometry || {}
+        const {lng, lat} = location
+        addDestination(lat, lng, address)
       },
     })
   }
@@ -45,4 +50,8 @@ const styles = StyleSheet.create({
   },
 })
 
-export default PlacesAutocomplete
+const mapDispatchToProps = dispatch => ({
+  addDestination: (lat, lng, address) => dispatch(addDestination(lat, lng, address)),
+})
+
+export default connect(null, mapDispatchToProps)(PlacesAutocomplete)
