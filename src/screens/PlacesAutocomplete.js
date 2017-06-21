@@ -17,7 +17,8 @@ class PlacesAutocomplete extends Component {
     }
   }
   render () {
-    const {navigation: {state: {params: {handleSelect}}}} = this.props
+    const {navigation} = this.props
+    const {state: {params: {handleSelect}}} = navigation
     return (
       <View style={styles.container}>
         <GooglePlacesAutocomplete
