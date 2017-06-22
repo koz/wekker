@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import {MapView, Location, Permissions} from 'expo'
 import {connect} from 'react-redux'
 import {getRegionContainingPoints} from '../utils/mapUtils'
+import {getFormattedAddress} from '../utils/fetcher'
+import {addDestination} from '../redux/actions'
+
 import {StyleSheet} from 'react-native'
 
 const mapStyle = [
@@ -125,10 +128,11 @@ class Map extends Component {
     })
   }
 
-  handleDragEnd(event) {
-    const {onDestinationSelect} = this.props
+  async handleDragEnd(event) {
+    const {addDestination} = this.props
     const {coordinate: {longitude, latitude}} = event.nativeEvent
-    onDestinationSelect(latitude, longitude)
+    const address = await getFormattedAddress(latitude, longitude)
+    address && addDestination(latitude, longitude, address)
   }
 
   componentWillUnmount() {
@@ -198,5 +202,9 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = ({wekker: {destination}}) => ({destination})
+const mapDispatchToProps = dispatch => ({
+  addDestination: (lat, lng, address) => dispatch(addDestination(lat, lng, address)),
+})
 
-export default connect(mapStateToProps)(Map)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map)

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Map from '../components/Map'
 import DestinationSelect from '../components/DestinationSelect'
-import axios from 'axios'
 import icon from '../assets/home.png'
 
 import {
@@ -11,8 +10,6 @@ import {
   Button,
   Image,
 } from 'react-native'
-
-const API_KEY = 'AIzaSyAnk9dToeoLZPY67jfYfh_1nt1cGfYZGCs'
 
 export default class Home extends Component {
   static navigationOptions = {
@@ -25,50 +22,12 @@ export default class Home extends Component {
     )
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {}
-    this.setDestination = this.setDestination.bind(this)
-  }
-
-  setDestination(lat, lng, address) {
-    if (!address) {
-      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY}`)
-      .then(({data: {results}}) => {
-        const {formatted_address: formattedAddress} = results[0]
-        this.setState({
-          destination: {
-            latitude: lat,
-            longitude: lng,
-            address: formattedAddress,
-          }
-        })
-      })
-    } else (
-      this.setState({
-        destination: {
-          latitude: lat,
-          longitude: lng,
-          address: address,
-        },
-      })
-    )
-  }
-
   render() {
-    const {destination} = this.state
     const {navigation: {navigate}} = this.props
     return (
       <View style={styles.container}>
-        <DestinationSelect
-          destination={destination}
-          navigate={navigate}
-          onDestinationSelect={this.setDestination}
-        />
-        <Map
-          destination={destination}
-          onDestinationSelect={this.setDestination}
-        />
+        <DestinationSelect navigate={navigate} />
+        <Map />
         <Button
           title="Ativar alarme"
           onPress={() => console.log('alarm')}

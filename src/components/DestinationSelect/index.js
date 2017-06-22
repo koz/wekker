@@ -27,7 +27,7 @@ class PlacesAutocomplete extends Component {
   }
 
   render() {
-    const {onDestinationSelect, destination, navigate} = this.props
+    const {destination, navigate} = this.props
     const address = destination ? destination.address : null
     return (
       <View
