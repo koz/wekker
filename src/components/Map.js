@@ -169,6 +169,7 @@ class Map extends Component {
           && actualLng
           && (
             <MapView.Marker
+              image={require('../assets/person.png')}
               coordinate={{
                 latitude: actualLat,
                 longitude: actualLng,
@@ -182,6 +183,7 @@ class Map extends Component {
           && (
             <MapView.Marker
               draggable
+              image={require('../assets/pin.png')}
               coordinate={{
                 latitude: destinationLat,
                 longitude: destinationLng,
