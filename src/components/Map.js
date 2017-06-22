@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
 import {MapView, Location, Permissions} from 'expo'
+import {connect} from 'react-redux'
+import {getRegionContainingPoints} from '../utils/mapUtils'
+import {getFormattedAddress} from '../utils/fetcher'
+import {addDestination} from '../redux/actions'
 
 import {StyleSheet} from 'react-native'
 
@@ -91,7 +95,7 @@ const mapStyle = [
   }
 ]
 
-export default class Map extends Component {
+class Map extends Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -124,10 +128,11 @@ export default class Map extends Component {
     })
   }
 
-  handleDragEnd(event) {
-    const {onDestinationSelect} = this.props
+  async handleDragEnd(event) {
+    const {addDestination} = this.props
     const {coordinate: {longitude, latitude}} = event.nativeEvent
-    onDestinationSelect(latitude, longitude)
+    const address = await getFormattedAddress(latitude, longitude)
+    address && addDestination(latitude, longitude, address)
   }
 
   componentWillUnmount() {
@@ -139,29 +144,53 @@ export default class Map extends Component {
     const {initialPosition, lastPosition} = this.state
     const initialCoords = initialPosition ? initialPosition.coords : null
     const lastCoords = lastPosition ? lastPosition.coords : null
-    const address = destination || (lastCoords || initialCoords)
-    const {latitude, longitude} = address || {}
+    const actualPosition = (lastCoords || initialCoords)
+    const {latitude: actualLat, longitude: actualLng} = actualPosition || {}
+    const {lat: destinationLat, lng: destinationLng} = destination || {}
+    const points = destination ? [actualPosition, {latitude: destinationLat, longitude: destinationLng}] : [actualPosition]
+    const {latitude, longitude, latitudeDelta, longitudeDelta} = points[0] ? getRegionContainingPoints(points) : {
+      latitude: actualLat || 37.78825,
+      longitude: actualLng || -122.4324,
+    }
+
     return (
       <MapView
         customMapStyle={mapStyle}
         style={styles.map}
         region={{
-          latitude: latitude || 37.78825,
-          longitude: longitude || -122.4324,
-          latitudeDelta: 0,
-          longitudeDelta: 0,
+          latitude,
+          longitude,
+          latitudeDelta: latitudeDelta * 2 || 0.0043,
+          longitudeDelta: longitudeDelta * 2 || 0.0043,
         }}
       >
         {
-          address
-          ? (
+          actualLat
+          && actualLng
+          && (
             <MapView.Marker
-              draggable
-              coordinate={{...address}}
-              onDragEnd	={this.handleDragEnd}
+              image={require('../assets/person.png')}
+              coordinate={{
+                latitude: actualLat,
+                longitude: actualLng,
+              }}
             />
           )
-          : null
+        }
+        {
+          destinationLat
+          && destinationLng
+          && (
+            <MapView.Marker
+              draggable
+              image={require('../assets/pin.png')}
+              coordinate={{
+                latitude: destinationLat,
+                longitude: destinationLng,
+              }}
+              onDragEnd = {this.handleDragEnd}
+            />
+          )
         }
       </MapView>
     )
@@ -173,3 +202,11 @@ const styles = StyleSheet.create({
    ...StyleSheet.absoluteFillObject,
   },
 })
+
+const mapStateToProps = ({wekker: {destination}}) => ({destination})
+const mapDispatchToProps = dispatch => ({
+  addDestination: (lat, lng, address) => dispatch(addDestination(lat, lng, address)),
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map)
