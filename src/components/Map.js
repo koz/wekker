@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {MapView, Location, Permissions} from 'expo'
+import {connect} from 'react-redux'
 
 import {StyleSheet} from 'react-native'
 
@@ -91,7 +92,7 @@ const mapStyle = [
   }
 ]
 
-export default class Map extends Component {
+class Map extends Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -139,29 +140,45 @@ export default class Map extends Component {
     const {initialPosition, lastPosition} = this.state
     const initialCoords = initialPosition ? initialPosition.coords : null
     const lastCoords = lastPosition ? lastPosition.coords : null
-    const address = destination || (lastCoords || initialCoords)
-    const {latitude, longitude} = address || {}
+    const actualPosition = (lastCoords || initialCoords)
+    const {latitude: actualLat, longitude: actualLng} = actualPosition || {}
+    const {lat: destinationLat, lng: destinationLng} = destination || {}
     return (
       <MapView
         customMapStyle={mapStyle}
         style={styles.map}
         region={{
-          latitude: latitude || 37.78825,
-          longitude: longitude || -122.4324,
-          latitudeDelta: 0,
-          longitudeDelta: 0,
+          latitude: actualLat || 37.78825,
+          longitude: actualLng || -122.4324,
+          latitudeDelta: 0.0043,
+          longitudeDelta: 0.0043,
         }}
       >
         {
-          address
-          ? (
+          actualLat
+          && actualLng
+          && (
             <MapView.Marker
-              draggable
-              coordinate={{...address}}
-              onDragEnd	={this.handleDragEnd}
+              coordinate={{
+                latitude: actualLat,
+                longitude: actualLng,
+              }}
             />
           )
-          : null
+        }
+        {
+          destinationLat
+          && destinationLng
+          && (
+            <MapView.Marker
+              draggable
+              coordinate={{
+                latitude: destinationLat,
+                longitude: destinationLng,
+              }}
+              onDragEnd = {this.handleDragEnd}
+            />
+          )
         }
       </MapView>
     )
@@ -173,3 +190,7 @@ const styles = StyleSheet.create({
    ...StyleSheet.absoluteFillObject,
   },
 })
+
+const mapStateToProps = ({wekker: {destination}}) => ({destination})
+
+export default connect(mapStateToProps)(Map)
