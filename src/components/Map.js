@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {MapView, Location, Permissions} from 'expo'
 import {connect} from 'react-redux'
-
+import {getRegionContainingPoints} from '../utils/mapUtils'
 import {StyleSheet} from 'react-native'
 
 const mapStyle = [
@@ -143,15 +143,21 @@ class Map extends Component {
     const actualPosition = (lastCoords || initialCoords)
     const {latitude: actualLat, longitude: actualLng} = actualPosition || {}
     const {lat: destinationLat, lng: destinationLng} = destination || {}
+    const points = destination ? [actualPosition, {latitude: destinationLat, longitude: destinationLng}] : [actualPosition]
+    const {latitude, longitude, latitudeDelta, longitudeDelta} = points[0] ? getRegionContainingPoints(points) : {
+      latitude: actualLat || 37.78825,
+      longitude: actualLng || -122.4324,
+    }
+
     return (
       <MapView
         customMapStyle={mapStyle}
         style={styles.map}
         region={{
-          latitude: actualLat || 37.78825,
-          longitude: actualLng || -122.4324,
-          latitudeDelta: 0.0043,
-          longitudeDelta: 0.0043,
+          latitude,
+          longitude,
+          latitudeDelta: latitudeDelta * 2 || 0.0043,
+          longitudeDelta: longitudeDelta * 2 || 0.0043,
         }}
       >
         {
