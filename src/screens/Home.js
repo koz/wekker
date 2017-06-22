@@ -2,12 +2,12 @@ import React, {Component} from 'react'
 import Map from '../components/Map'
 import DestinationSelect from '../components/DestinationSelect'
 import icon from '../assets/home.png'
+import Button from '../components/Button'
 
 import {
   AppRegistry,
   StyleSheet,
   View,
-  Button,
   Image,
 } from 'react-native'
 
@@ -29,10 +29,11 @@ export default class Home extends Component {
         <DestinationSelect navigate={navigate} />
         <Map />
         <Button
-          title="Ativar alarme"
           onPress={() => console.log('alarm')}
           accessibilityLabel="Ativar alarme"
-        />
+        >
+          Ativar alarme
+        </Button>
       </View>
     )
   }
