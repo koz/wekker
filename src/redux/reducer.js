@@ -4,6 +4,7 @@ import {
   SET_LOCATIONS,
   START_TRACKING,
   STOP_TRACKING,
+  SET_CURRENT_POSITION,
 } from './actionTypes'
 
 const Item = title => ({
@@ -53,6 +54,13 @@ export default function reducer(state = InitialState, action) {
       return {
         ...state,
         tracking: false,
+      }
+    case SET_CURRENT_POSITION:
+      return {
+        ...state,
+        currentPosition: {
+          ...payload.currentPosition
+        }
       }
     default:
       return state

@@ -4,6 +4,7 @@ import {
   SET_LOCATIONS,
   START_TRACKING,
   STOP_TRACKING,
+  SET_CURRENT_POSITION,
 } from './actionTypes'
 
 export function startTracking() {
@@ -18,6 +19,18 @@ export function setRadius (radius) {
   return {
     type: SET_RADIUS,
     payload: { radius }
+  }
+}
+
+export function setCurrentPosition (lat, lng) {
+  return {
+    type: SET_CURRENT_POSITION,
+    payload: {
+      currentPosition: {
+        lat,
+        lng,
+      },
+    },
   }
 }
 
