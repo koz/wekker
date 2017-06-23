@@ -9,6 +9,7 @@ import {
   StyleSheet,
   View,
   Image,
+  Dimensions,
 } from 'react-native'
 import {connect} from 'react-redux'
 
@@ -25,6 +26,8 @@ class Home extends Component {
 
   render() {
     const {navigation: {navigate}, destination} = this.props
+    const {width, height} = Dimensions.get('window')
+
     return (
       <View style={styles.container}>
         <DestinationSelect navigate={navigate} />
@@ -33,6 +36,9 @@ class Home extends Component {
           disabled={!destination}
           onPress={() => console.log('alarm')}
           accessibilityLabel="Ativar alarme"
+          buttonStyle={{
+            width: width * 0.8,
+          }}
         >
           Ativar alarme
         </Button>
