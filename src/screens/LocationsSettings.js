@@ -34,7 +34,6 @@ class LocationsGeneral extends Component {
   handleLocationClick = (index) => {
     const { navigate } = this.props.navigation
     navigate('LocationsAutocomplete', {
-      callbackLocation: 'Locations',
       handleSelect: (data, details) => (
         this.props.setLocations(this.props.locations.map((l, i) => {
           if (i === index) return { ...l, value: details.formatted_address }
@@ -130,7 +129,20 @@ const connectedLocationsGeneral = connect(mapStateToProps, mapActionsCreators)(L
 export default StackNavigator(
   {
     LocationsGeneral: {screen: connectedLocationsGeneral},
-    LocationsAutocomplete: {screen: PlacesAutocomplete},
+    LocationsAutocomplete: {
+      screen: PlacesAutocomplete,
+      navigationOptions: {
+        tabBarIcon: ({tintColor}) => (
+          <Image
+            source={settingsIcon}
+            style={[
+              styles.settingsIcon,
+              {tintColor},
+            ]}
+          />
+        ),
+      },
+    },
   },
   {headerMode: 'none'}
 )
