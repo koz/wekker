@@ -4,13 +4,13 @@ import {StyleSheet, Text, TouchableHighlight} from 'react-native'
 
 const styles = StyleSheet.create({
   button: {
-    padding: 14,
+    padding: 12,
     borderRadius: 6,
     alignItems: 'center',
     backgroundColor: '#62A1D4',
   },
   buttonText: {
-    fontSize: 24,
+    fontSize: 20,
     color: '#fff',
     fontWeight: 'bold',
   },
