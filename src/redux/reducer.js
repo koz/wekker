@@ -3,6 +3,7 @@ import {
   SET_DESTINATION,
   START_TRACKING,
   STOP_TRACKING,
+  SET_CURRENT_POSITION,
 } from './actionTypes'
 
 const wekker = {
@@ -36,6 +37,13 @@ export default function reducer(state = wekker, {type, payload}) {
       return {
         ...state,
         tracking: false,
+      }
+    case SET_CURRENT_POSITION:
+      return {
+        ...state,
+        currentPosition: {
+          ...payload.currentPosition
+        }
       }
     default:
       return state
