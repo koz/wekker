@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
-import {MapView, Location, Permissions} from 'expo'
 import {connect} from 'react-redux'
-import {getRegionContainingPoints} from '../utils/mapUtils'
-import {getFormattedAddress} from '../utils/fetcher'
-import {addDestination} from '../redux/actions'
-
+import React, {Component} from 'react'
 import {StyleSheet} from 'react-native'
+import {MapView, Location, Permissions} from 'expo'
+
+import {addDestination} from '../redux/actions'
+import {getFormattedAddress} from '../utils/fetcher'
+import {getRegionContainingPoints} from '../utils/mapUtils'
 
 const mapStyle = [
   {
@@ -155,6 +155,7 @@ class Map extends Component {
 
     return (
       <MapView
+        provider="google"
         customMapStyle={mapStyle}
         style={styles.map}
         region={{
