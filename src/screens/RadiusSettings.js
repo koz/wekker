@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     flex: 1,
-    paddingTop: 72,
+    paddingTop: 48,
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 40,
@@ -70,10 +70,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 160,
+    height: 160,
     alignSelf: 'center',
-    marginBottom: 34,
+    marginBottom: 36,
   },
   sliderWrapper: {
     flex: 1,
@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#E3EAFA',
   },
   thumb: {
-    width: 40,
-    height: 40,
-    bottom: 0,
-    borderRadius: 20,
+    width: 28,
+    height: 28,
+    bottom: 6,
+    borderRadius: 14,
     backgroundColor: '#9986FC',
   },
   text: {
-    fontSize: 26,
+    fontSize: 22,
     alignSelf: 'center',
   },
 })
