@@ -50,6 +50,7 @@ class Home extends Component {
 
     return (
       <View style={styles.container}>
+        <StatusBar hidden />
         <DestinationSelect navigate={navigate} />
         <Map />
         {

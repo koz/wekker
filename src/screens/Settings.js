@@ -43,6 +43,7 @@ class GeneralSettings extends Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
+        <StatusBar hidden />
         <View style={styles.itemContainer}>
           <View style={styles.toggleWrapper}>
             <Text style={styles.buttonText}>

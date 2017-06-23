@@ -1,11 +1,12 @@
-import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import React, {Component} from 'react'
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 import {
   View,
+  Image,
+  StatusBar,
   Dimensions,
   StyleSheet,
-  Image,
   TouchableHighlight,
 } from 'react-native'
 
@@ -20,7 +21,6 @@ class PlacesAutocomplete extends Component {
   handlePress = (data, details) => {
     const { navigation } = this.props
     const { handleSelect, callbackLocation } = navigation.state.params
-    
     handleSelect(data, details)
     callbackLocation ?
       navigation.navigate(callbackLocation) :
@@ -30,6 +30,7 @@ class PlacesAutocomplete extends Component {
   render () {
     return (
       <View style={styles.container}>
+        <StatusBar hidden />
         <GooglePlacesAutocomplete
           placeholder='Digite o seu destino'
           autoFocus={true}

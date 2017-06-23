@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import Slider from 'react-native-slider'
-import {View, Text, Image, StyleSheet} from 'react-native'
+import {View, Text, Image, StyleSheet, StatusBar} from 'react-native'
 
 import Button from '../components/Button'
 import {setRadius} from '../redux/actions'
@@ -41,6 +41,7 @@ class RadiusSettings extends Component {
     const {radius} = this.state
     return (
       <View style={styles.container}>
+        <StatusBar hidden />
         <Spinner
           style={styles.image}
           source={require('../assets/radar.png')}

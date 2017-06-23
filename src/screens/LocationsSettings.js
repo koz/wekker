@@ -5,12 +5,13 @@ import arrowIcon from '../assets/arrow.png'
 import { setLocations } from '../redux/actions'
 import {
   View,
-  StyleSheet,
-  TouchableHighlight,
-  Animated,
+  Text,
   Image,
   Easing,
-  Text
+  Animated,
+  StatusBar,
+  StyleSheet,
+  TouchableHighlight,
 } from 'react-native'
 
 class LocationsSettings extends Component {
@@ -43,6 +44,7 @@ class LocationsSettings extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar hidden />
         {
           this.props.locations.map((l, i) => (
             <View key={i} style={styles.itemContainer}>
