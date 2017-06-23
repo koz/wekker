@@ -23,7 +23,6 @@ import icon from '../assets/settings.png'
 class GeneralSettings extends Component {
   static navigationOptions = {
     title: 'Configurações',
-    ...navigationStyles,
     tabBarIcon: (focused, tintColor) => (
       <Image
         source={settingsIcon}

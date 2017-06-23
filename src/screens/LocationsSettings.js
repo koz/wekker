@@ -17,7 +17,6 @@ import {
 class LocationsSettings extends Component {
   static navigationOptions = {
     title: 'Definir localização',
-    ...navigationStyles,
     tabBarIcon: (focused, tintColor) => (
       <Image
         source={settingsIcon}
