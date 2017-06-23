@@ -5,6 +5,7 @@ import {View, Text, Image, StyleSheet} from 'react-native'
 
 import Button from '../components/Button'
 import {setRadius} from '../redux/actions'
+import Spinner from '../components/Spinner'
 
 class RadiusSettings extends Component {
   static navigationOptions = {
@@ -30,7 +31,7 @@ class RadiusSettings extends Component {
     const {radius} = this.state
     return (
       <View style={styles.container}>
-        <Image
+        <Spinner
           style={styles.image}
           source={require('../assets/radar.png')}
         />
