@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import settingsIcon from '../assets/settings.png'
 import arrowIcon from '../assets/arrow.png'
-import { navigationStyles } from '../utils/header'
 import { setLocations } from '../redux/actions'
 import {
   View,
@@ -89,7 +88,8 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   button: {
     paddingTop: 30,
@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
   arrowIcon: {
     width: 16,
     height: 16,
-    alignSelf: 'flex-end',
     marginRight: 10
   },
   settingsIcon: {

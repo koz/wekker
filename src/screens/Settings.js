@@ -13,8 +13,6 @@ import RadiusSettings from './RadiusSettings'
 import SoundSettings from './SoundSettings'
 import LocationsSettings from './LocationsSettings'
 
-import { navigationStyles } from '../utils/header'
-
 import settingsIcon from '../assets/settings.png'
 import arrowIcon from '../assets/arrow.png'
 import icon from '../assets/settings.png'
