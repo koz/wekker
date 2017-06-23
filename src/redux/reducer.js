@@ -25,24 +25,24 @@ const InitialState = {
   tracking: false,
 }
 
-export default function reducer(state = InitialState, action) {
-  switch(action.type) {
+export default function reducer(state = InitialState, {type, payload}) {
+  switch(type) {
     case SET_DESTINATION:
       return {
         ...state,
-        destination: action.payload.destination
+        destination: payload.destination
       }
     case SET_LOCATIONS:
       return {
         ...state,
-        locations: action.payload.locations
+        locations: payload.locations
       }
     case SET_RADIUS:
       return {
         ...state,
         settings: {
           ...state.settings,
-          radius: action.payload.radius
+          radius: payload.radius
         }
       }
     case START_TRACKING:
