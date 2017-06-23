@@ -1,12 +1,10 @@
+import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import Slider from 'react-native-slider'
+import {View, Text, Image, StyleSheet} from 'react-native'
+
 import Button from '../components/Button'
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-} from 'react-native'
+import {setRadius} from '../redux/actions'
 
 class RadiusSettings extends Component {
   static navigationOptions = {
@@ -15,16 +13,21 @@ class RadiusSettings extends Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      value: 500,
-    }
+    this.state = {radius: props.radius}
   }
 
-  handleSlide = (value) => {
-    this.setState({value})
+  handleSlide = (radius) => {
+    this.setState({radius})
+  }
+
+  handlePress = () => {
+    const {navigation: {goBack}, setRadius} = this.props
+    setRadius(this.state.radius)
+    goBack()
   }
 
   render () {
+    const {radius} = this.state
     return (
       <View style={styles.container}>
         <Image
@@ -33,7 +36,7 @@ class RadiusSettings extends Component {
         />
         <View style={styles.sliderWrapper}>
           <Slider
-            value={this.state.value}
+            value={radius}
             maximumValue={2000}
             minimumValue={500}
             step={100}
@@ -44,10 +47,10 @@ class RadiusSettings extends Component {
             minimumTrackTintColor='#9986FC'
           />
           <Text style={styles.text}>
-            {`${this.state.value} m`}
+            {radius} m
           </Text>
         </View>
-        <Button onPress={() => {}}>
+        <Button onPress={this.handlePress}>
           Confirmar
         </Button>
       </View>
@@ -96,5 +99,7 @@ const styles = StyleSheet.create({
   },
 })
 
+const mapStateToProps = ({wekker: {settings: {radius}}}) => ({radius})
+const mapDispatchToProps = dispatch => ({setRadius: radius => dispatch(setRadius(radius))})
 
-export default RadiusSettings
+export default connect(mapStateToProps, mapDispatchToProps)(RadiusSettings)

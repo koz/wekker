@@ -1,24 +1,15 @@
 import React from 'react'
-import AppNavigator from './Router'
-import {
-  View,
-  Text
-} from 'react-native'
-import {addNavigationHelpers} from 'react-navigation';
 import {connect} from 'react-redux'
+import {View, Text} from 'react-native'
+import {addNavigationHelpers} from 'react-navigation'
 
-const App = (props) => {
-  const {router} = AppNavigator
-  const {nav, dispatch} = props
-  return (
-    <AppNavigator navigation={addNavigationHelpers({
-      dispatch,
-      state: nav,
-    })}
-    />
-  )
+import AppNavigator from './Router'
+
+function App ({navigation, dispatch}) {
+  const fullNavigation = addNavigationHelpers({dispatch, state: navigation})
+  return <AppNavigator navigation={fullNavigation} />
 }
 
-const mapStateToProps = ({nav}) => ({nav});
+const mapStateToProps = ({navigation}) => ({navigation})
 
 export default connect(mapStateToProps)(App)
