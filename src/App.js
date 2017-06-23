@@ -1,8 +1,7 @@
-import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {View, Text} from 'react-native'
-import {addNavigationHelpers} from 'react-navigation'
+import React, {Component} from 'react'
 import {Location, Permissions} from 'expo'
+import {addNavigationHelpers} from 'react-navigation'
 
 import {setCurrentPosition} from './redux/actions'
 import AppNavigator from './Router'

@@ -1,7 +1,6 @@
 import React from 'react'
 import logger from 'redux-logger'
 import {Provider} from 'react-redux'
-import {View, Text} from 'react-native'
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 
 import AppNavigator from './Router'

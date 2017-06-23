@@ -1,6 +1,7 @@
 import {StackNavigator} from 'react-navigation'
-import PlacesAutocomplete from './screens/PlacesAutocomplete'
+
 import Home from './screens/Home'
+import PlacesAutocomplete from './screens/PlacesAutocomplete'
 
 export default StackNavigator({
   Home: {
