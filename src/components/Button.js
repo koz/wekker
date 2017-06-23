@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 6,
     alignItems: 'center',
-    backgroundColor: '#62A1D4',
   },
   buttonText: {
     fontSize: 20,
@@ -16,11 +15,15 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function Button ({children, onPress}) {
+export default function Button ({children, onPress, disabled}) {
   return (
     <TouchableHighlight
-      style={styles.button}
-      onPress={onPress}
+      style={[
+        styles.button,
+        {backgroundColor: disabled ? "#8E8E8E" : "#62A1D4"},
+      ]}
+      onPress={!disabled ? onPress : null}
+      underlayColor="#62A1D4"
     >
       <Text style={styles.buttonText}>
         {children}
@@ -32,4 +35,5 @@ export default function Button ({children, onPress}) {
 Button.propTypes = {
   onPress: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
 }

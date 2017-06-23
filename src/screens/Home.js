@@ -10,8 +10,9 @@ import {
   View,
   Image,
 } from 'react-native'
+import {connect} from 'react-redux'
 
-export default class Home extends Component {
+class Home extends Component {
   static navigationOptions = {
     header: null,
     tabBarIcon: (focused, tintColor) => (
@@ -23,12 +24,13 @@ export default class Home extends Component {
   }
 
   render() {
-    const {navigation: {navigate}} = this.props
+    const {navigation: {navigate}, destination} = this.props
     return (
       <View style={styles.container}>
         <DestinationSelect navigate={navigate} />
         <Map />
         <Button
+          disabled={!destination}
           onPress={() => console.log('alarm')}
           accessibilityLabel="Ativar alarme"
         >
@@ -55,3 +57,7 @@ const styles = StyleSheet.create({
     height: 26,
   },
 })
+
+const mapStateToProps = ({wekker: {destination}}) => ({destination})
+
+export default connect(mapStateToProps)(Home)
