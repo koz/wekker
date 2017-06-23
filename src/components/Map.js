@@ -74,8 +74,8 @@ class Map extends Component {
         customMapStyle={mapStyle}
         style={styles.map}
         region={{
-          latitude: lat,
-          longitude: lng,
+          latitude: lat || 0,
+          longitude: lng || 0,
           latitudeDelta: latDelta * 2 || 0.0043,
           longitudeDelta: lngDelta * 2 || 0.0043,
         }}
