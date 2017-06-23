@@ -46,6 +46,9 @@ const styles = {
     borderRadius: 2,
     margin: 10,
     width: width * 0.9,
+    shadowOffset:{  width: 8,  height: 8,  },
+    shadowColor: '#A6A6A6',
+    shadowOpacity: 0.6,
   },
   button: {
     marginLeft: 20,
