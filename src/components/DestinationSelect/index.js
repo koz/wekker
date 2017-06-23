@@ -32,7 +32,7 @@ class PlacesAutocomplete extends Component {
         <PickAddress
           address={address}
           handlePress={this.openSearchModal}
-          placeholder='Endereço de Destino'
+          placeholder='Digite o seu destino'
         />
       </View>
     )

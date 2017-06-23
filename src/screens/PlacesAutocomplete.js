@@ -22,7 +22,7 @@ class PlacesAutocomplete extends Component {
     return (
       <View style={styles.container}>
         <GooglePlacesAutocomplete
-          placeholder='Endereço de Destino'
+          placeholder='Digite o seu destino'
           autoFocus={true}
           fetchDetails={true}
           onPress={(data, details) => {
