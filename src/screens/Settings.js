@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
   },
   switch: {
     alignSelf: 'flex-end',
-    backgroundColor: '#898989',
     borderRadius: 15,
   }
 })
