@@ -1,11 +1,9 @@
-import React, {Component} from 'react'
-import {
-  View,
-  StyleSheet,
-} from 'react-native'
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
-import PickAddress from './PickAddress'
 import {connect} from 'react-redux'
+import React, {Component} from 'react'
+import {View, StyleSheet} from 'react-native'
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
+
+import PickAddress from './PickAddress'
 import {addDestination} from '../../redux/actions'
 
 class PlacesAutocomplete extends Component {
@@ -30,9 +28,7 @@ class PlacesAutocomplete extends Component {
     const {destination, navigate} = this.props
     const address = destination ? destination.address : null
     return (
-      <View
-        style={styles.container}
-      >
+      <View style={styles.container}>
         <PickAddress
           address={address}
           handlePress={this.openSearchModal}
