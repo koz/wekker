@@ -27,14 +27,6 @@ const mapStyle = [
   },
   {
     "featureType": "road",
-    "stylers": [
-      {
-        "color": "#fffefe"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
     "elementType": "labels.icon",
     "stylers": [
       {
