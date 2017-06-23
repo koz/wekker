@@ -1,2 +1,4 @@
 export const SET_RADIUS = 'SET_RADIUS'
 export const SET_DESTINATION = 'SET_DESTINATION'
+export const START_TRACKING = 'START_TRACKING'
+export const STOP_TRACKING = 'STOP_TRACKING'

@@ -1,9 +1,15 @@
-import {SET_RADIUS, SET_DESTINATION} from './actionTypes'
+import {
+  SET_RADIUS,
+  SET_DESTINATION,
+  START_TRACKING,
+  STOP_TRACKING,
+} from './actionTypes'
 
 const wekker = {
   settings: {
     radius: 500,
   },
+  tracking: false,
 }
 
 export default function reducer(state = wekker, {type, payload}) {
@@ -20,6 +26,16 @@ export default function reducer(state = wekker, {type, payload}) {
           ...state.settings,
           radius: payload.radius,
         },
+      }
+    case START_TRACKING:
+      return {
+        ...state,
+        tracking: true,
+      }
+    case STOP_TRACKING:
+      return {
+        ...state,
+        tracking: false,
       }
     default:
       return state
