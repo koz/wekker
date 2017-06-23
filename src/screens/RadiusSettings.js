@@ -6,10 +6,20 @@ import {View, Text, Image, StyleSheet} from 'react-native'
 import Button from '../components/Button'
 import {setRadius} from '../redux/actions'
 import Spinner from '../components/Spinner'
+import settingsIcon from '../assets/settings.png'
 
 class RadiusSettings extends Component {
   static navigationOptions = {
     title: 'Raio de Alarme',
+    tabBarIcon: ({tintColor}) => (
+      <Image
+        source={settingsIcon}
+        style={[
+          styles.settingsIcon,
+          {tintColor},
+        ]}
+      />
+    )
   }
 
   constructor (props) {
@@ -97,6 +107,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 22,
     alignSelf: 'center',
+  },
+  settingsIcon: {
+    width: 26,
+    height: 26,
   },
 })
 

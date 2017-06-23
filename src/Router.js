@@ -20,6 +20,7 @@ export default TabNavigator(
       },
       showIcon: true,
       showLabel: false,
+      activeTintColor: '#9986FC',
     }
   }
 )

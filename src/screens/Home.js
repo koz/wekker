@@ -1,28 +1,32 @@
+import {connect} from 'react-redux'
 import React, {Component} from 'react'
-import Map from '../components/Map'
-import DestinationSelect from '../components/DestinationSelect'
-import icon from '../assets/home.png'
-import Button from '../components/Button'
-import DistanceIndicator from '../components/DistanceIndicator'
-import {startTracking} from '../redux/actions'
-import {getCoordsDistance} from '../utils/mapUtils'
-
 import {
-  AppRegistry,
-  StyleSheet,
   View,
   Image,
+  StatusBar,
+  StyleSheet,
   Dimensions,
+  AppRegistry,
 } from 'react-native'
-import {connect} from 'react-redux'
+
+import Map from '../components/Map'
+import icon from '../assets/home.png'
+import Button from '../components/Button'
+import {startTracking} from '../redux/actions'
+import {getCoordsDistance} from '../utils/mapUtils'
+import DistanceIndicator from '../components/DistanceIndicator'
+import DestinationSelect from '../components/DestinationSelect'
 
 class Home extends Component {
   static navigationOptions = {
     header: null,
-    tabBarIcon: (focused, tintColor) => (
+    tabBarIcon: ({tintColor}) => (
       <Image
         source={icon}
-        style={styles.icon}
+        style={[
+          styles.icon,
+          {tintColor},
+        ]}
       />
     )
   }

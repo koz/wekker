@@ -5,27 +5,30 @@ import {
   View,
   Text,
   Image,
+  StatusBar,
   StyleSheet,
   Dimensions,
   TouchableHighlight,
 } from 'react-native'
-import { StackNavigator } from 'react-navigation'
-import RadiusSettings from './RadiusSettings'
-import SoundSettings from './SoundSettings'
-import LocationsSettings from './LocationsSettings'
 
-import settingsIcon from '../assets/settings.png'
-import arrowIcon from '../assets/arrow.png'
 import icon from '../assets/settings.png'
+import arrowIcon from '../assets/arrow.png'
+import SoundSettings from './SoundSettings'
+import RadiusSettings from './RadiusSettings'
+import settingsIcon from '../assets/settings.png'
+import LocationsSettings from './LocationsSettings'
 
 
 class GeneralSettings extends Component {
   static navigationOptions = {
     title: 'Configurações',
-    tabBarIcon: (focused, tintColor) => (
+    tabBarIcon: ({tintColor}) => (
       <Image
         source={settingsIcon}
-        style={styles.settingsIcon}
+        style={[
+          styles.settingsIcon,
+          {tintColor},
+        ]}
       />
     )
   }
