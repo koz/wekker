@@ -1,4 +1,10 @@
-import { SET_RADIUS, SET_DESTINATION, SET_LOCATIONS } from './actionTypes'
+import {
+  SET_RADIUS,
+  SET_DESTINATION,
+  SET_LOCATIONS,
+  START_TRACKING,
+  STOP_TRACKING,
+} from './actionTypes'
 
 const Item = title => ({
   title,
@@ -13,8 +19,9 @@ const InitialState = {
   ],
   destination: null,
   settings: {
-    radius: 500
-  }
+    radius: 500,
+  },
+  tracking: false,
 }
 
 export default function reducer(state = InitialState, action) {
@@ -36,6 +43,16 @@ export default function reducer(state = InitialState, action) {
           ...state.settings,
           radius: action.payload.radius
         }
+      }
+    case START_TRACKING:
+      return {
+        ...state,
+        tracking: true,
+      }
+    case STOP_TRACKING:
+      return {
+        ...state,
+        tracking: false,
       }
     default:
       return state
