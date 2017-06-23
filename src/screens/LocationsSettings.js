@@ -15,8 +15,7 @@ import {
 const Item = title => ({
   title,
   value: null,
-  opened: false,
-  angle: new Animated.Value(90)
+  opened: false
 })
 
 class LocationsSettings extends Component {
@@ -31,33 +30,16 @@ class LocationsSettings extends Component {
     )
   }
 
+  handleLocationClick = (index) => {
+    const {navigate} = this.props
+    navigate('Autocomplete')
+  }
+
   state = {
     list: [
       new Item('Casa'),
       new Item('Trabalho')
     ]
-  }
-
-  handleLocationClick = index => {
-    this.setState(prevState => ({
-      list: prevState.list.map((l, i) => {
-        if (i === index) {
-          return { ...l, opened: !l.opened }
-        }
-
-        return { ...l }
-      })
-    }), () => {
-      this.animate(index, this.state.list[index].opened)
-    })
-  }
-
-  animate = (index, reverse) => {
-    Animated.timing(this.state.list[index].angle, {
-      toValue: reverse ? 270 : 90,
-      duration: 200,
-      easing: Easing.linear
-    }).start();
   }
 
   render() {
@@ -76,15 +58,7 @@ class LocationsSettings extends Component {
                     { l.title.toUpperCase() }
                   </Text>
                   <Animated.Image
-                    style={[
-                      styles.arrowIcon,
-                      { transform: [{
-                        rotate: this.state.list[i].angle.interpolate({
-                          inputRange: [0, 360],
-                          outputRange: ['0deg', '360deg']
-                        })
-                      }]}
-                    ]}
+                    style={styles.arrowIcon}
                     source={arrowIcon}
                   />
                 </View>
@@ -127,10 +101,7 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     alignSelf: 'flex-end',
-    marginRight: 10,
-    transform: [{
-      rotate: '90deg'
-    }]
+    marginRight: 10
   },
   settingsIcon: {
     width: 26,
