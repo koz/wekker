@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import settingsIcon from '../assets/settings.png'
 import arrowIcon from '../assets/arrow.png'
 import { navigationStyles } from '../utils/header'
+import { setLocations } from '../redux/actions'
 import {
   View,
   StyleSheet,
@@ -11,12 +13,6 @@ import {
   Easing,
   Text
 } from 'react-native'
-
-const Item = title => ({
-  title,
-  value: null,
-  opened: false
-})
 
 class LocationsSettings extends Component {
   static navigationOptions = {
@@ -31,22 +27,23 @@ class LocationsSettings extends Component {
   }
 
   handleLocationClick = (index) => {
-    const {navigate} = this.props
-    navigate('Autocomplete')
-  }
-
-  state = {
-    list: [
-      new Item('Casa'),
-      new Item('Trabalho')
-    ]
+    const { navigate } = this.props.navigation
+    navigate('Autocomplete', {
+      callbackLocation: 'Locations',
+      handleSelect: (data, details) => (
+        this.props.setLocations(this.props.locations.map((l, i) => {
+          if (i === index) return { ...l, value: details.formatted_address }
+          return { ...l }
+        }))
+      )
+    })
   }
 
   render() {
     return (
       <View style={styles.container}>
         {
-          this.state.list.map((l, i) => (
+          this.props.locations.map((l, i) => (
             <View key={i} style={styles.itemContainer}>
               <TouchableHighlight
                 underlayColor={'#FFF'}
@@ -54,9 +51,16 @@ class LocationsSettings extends Component {
                 style={styles.button}
               >
                 <View style={styles.buttonWrapper}>
-                  <Text style={styles.buttonText}>
-                    { l.title.toUpperCase() }
-                  </Text>
+                  <View>
+                    <Text style={styles.buttonText}>
+                      { l.title.toUpperCase() }
+                    </Text>
+                    { l.value ? (
+                      <Text>
+                        { l.value }
+                      </Text>
+                    ) : null }
+                  </View>
                   <Animated.Image
                     style={styles.arrowIcon}
                     source={arrowIcon}
@@ -109,4 +113,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default LocationsSettings
+const mapActionsCreators = { setLocations }
+
+const mapStateToProps = state => ({
+  locations: state.wekker.locations
+})
+
+export default connect(mapStateToProps, mapActionsCreators)(LocationsSettings)

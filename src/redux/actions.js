@@ -1,9 +1,9 @@
-import {SET_RADIUS, SET_DESTINATION} from './actionTypes'
+import { SET_RADIUS, SET_DESTINATION, SET_LOCATIONS } from './actionTypes'
 
 export function setRadius (radius) {
   return {
     type: SET_RADIUS,
-    payload: {radius},
+    payload: { radius }
   }
 }
 
@@ -14,8 +14,15 @@ export function addDestination (lat, lng, address) {
       destination: {
         lat,
         lng,
-        address,
-      },
-    },
+        address
+      }
+    }
+  }
+}
+
+export function setLocations(locations) {
+  return {
+    type: SET_LOCATIONS,
+    payload: { locations }
   }
 }
