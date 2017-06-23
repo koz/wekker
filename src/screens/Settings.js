@@ -5,13 +5,13 @@ import {
   Image,
   StyleSheet,
   Switch,
-  Text,
+  Dimensions,
+  Text
 } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import RadiusSettings from './RadiusSettings'
 import SoundSettings from './SoundSettings'
 import LocationsSettings from './LocationsSettings'
-import Title from '../components/Title'
 
 import settingsIcon from '../assets/settings.png'
 import arrowIcon from '../assets/arrow.png'
@@ -20,9 +20,7 @@ import icon from '../assets/settings.png'
 
 class GeneralSettings extends Component {
   static navigationOptions = {
-    header: () => (
-      <Title text={'Configurações'} />
-    ),
+    title: 'Configurações',
     tabBarIcon: (focused, tintColor) => (
       <Image
         source={settingsIcon}
@@ -38,6 +36,7 @@ class GeneralSettings extends Component {
   handleNotificationsChange = value => this.setState({ isActive: value })
 
   render() {
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <View style={styles.itemContainer}>
@@ -57,7 +56,8 @@ class GeneralSettings extends Component {
         </View>
         <View style={styles.itemContainer}>
           <TouchableHighlight
-            onPress={() => this.props.navigation.navigate('Locations')}
+            underlayColor={'#FFF'}
+            onPress={() => navigate('Locations')}
             style={styles.button}
           >
             <View style={styles.buttonWrapper}>
@@ -73,7 +73,8 @@ class GeneralSettings extends Component {
         </View>
         <View style={styles.itemContainer}>
           <TouchableHighlight
-            onPress={() => this.props.navigation.navigate('Radius')}
+            underlayColor={'#FFF'}
+            onPress={() => navigate('Radius')}
             style={styles.button}
           >
             <View style={styles.buttonWrapper}>
@@ -96,7 +97,7 @@ const Settings = StackNavigator({
   General: {screen: GeneralSettings},
   Radius: {screen: RadiusSettings},
   Sound: {screen: SoundSettings},
-  Locations: {screen: LocationsSettings},
+  Locations: {screen: LocationsSettings}
 })
 
 const styles = StyleSheet.create({
@@ -107,8 +108,6 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   itemContainer: {
-    paddingTop: 30,
-    paddingBottom: 30,
     marginLeft: 30,
     marginRight: 30,
     borderBottomWidth: 1,
@@ -125,10 +124,14 @@ const styles = StyleSheet.create({
     height: 26,
   },
   toggleWrapper: {
+    paddingTop: 30,
+    paddingBottom: 30,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
   buttonWrapper: {
+    paddingTop: 30,
+    paddingBottom: 30,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },

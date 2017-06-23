@@ -16,19 +16,25 @@ class PlacesAutocomplete extends Component {
       searchValue: ''
     }
   }
+
+  handlePress = (data, details) => {
+    const { navigation } = this.props
+    const { handleSelect, callbackLocation } = navigation.state.params
+    
+    handleSelect(data, details)
+    callbackLocation ?
+      navigation.navigate(callbackLocation) :
+      navigation.goBack()
+  }
+
   render () {
-    const {navigation} = this.props
-    const {state: {params: {handleSelect}}} = navigation
     return (
       <View style={styles.container}>
         <GooglePlacesAutocomplete
           placeholder='Digite o seu destino'
           autoFocus={true}
           fetchDetails={true}
-          onPress={(data, details) => {
-            handleSelect(data, details)
-            navigation.goBack()
-          }}
+          onPress={this.handlePress}
           query={{
             key: 'AIzaSyAnk9dToeoLZPY67jfYfh_1nt1cGfYZGCs',
             language: 'pt',

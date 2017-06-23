@@ -1,2 +1,3 @@
 export const SET_RADIUS = 'SET_RADIUS'
 export const SET_DESTINATION = 'SET_DESTINATION'
+export const SET_LOCATIONS = 'SET_LOCATIONS'

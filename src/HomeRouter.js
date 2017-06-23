@@ -8,5 +8,5 @@ export default StackNavigator({
   },
   Autocomplete: {
     screen: PlacesAutocomplete,
-  },
+  }
 });
