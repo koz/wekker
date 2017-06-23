@@ -7,11 +7,6 @@ class Spinner extends Component {
     super(props)
     this.unmounted = false
     this.state = {spinValue: new Animated.Value(0)}
-    this.spin = Animated.timing(this.state.spinValue, {
-      toValue: 100,
-      duration: 5000,
-      easing: Easing.linear,
-    })
   }
 
   componentDidMount () {
@@ -23,14 +18,19 @@ class Spinner extends Component {
   }
 
   spinForever = () => {
-    this.spin.start(event => {
+    Animated.timing(this.state.spinValue, {
+      toValue: 100,
+      duration: 5000,
+      easing: Easing.linear,
+    })
+    .start(event => {
       if (this.unmounted) {
         return
       }
       if (event.finished) {
         this.setState({spinValue: new Animated.Value(0)})
+        this.spinForever()
       }
-      this.spinForever()
     })
   }
 
