@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import settingsIcon from '../assets/settings.png'
-import arrowIcon from '../assets/arrow.png'
-import { setLocations } from '../redux/actions'
+import {connect} from 'react-redux'
+import React, {Component} from 'react'
+import {StackNavigator} from 'react-navigation'
 import {
   View,
   Text,
@@ -14,7 +12,12 @@ import {
   TouchableHighlight,
 } from 'react-native'
 
-class LocationsSettings extends Component {
+import arrowIcon from '../assets/arrow.png'
+import {setLocations} from '../redux/actions'
+import settingsIcon from '../assets/settings.png'
+import PlacesAutocomplete from './PlacesAutocomplete'
+
+class LocationsGeneral extends Component {
   static navigationOptions = {
     title: 'Definir localização',
     tabBarIcon: ({tintColor}) => (
@@ -30,7 +33,7 @@ class LocationsSettings extends Component {
 
   handleLocationClick = (index) => {
     const { navigate } = this.props.navigation
-    navigate('Autocomplete', {
+    navigate('LocationsAutocomplete', {
       callbackLocation: 'Locations',
       handleSelect: (data, details) => (
         this.props.setLocations(this.props.locations.map((l, i) => {
@@ -122,4 +125,12 @@ const mapStateToProps = state => ({
   locations: state.wekker.locations
 })
 
-export default connect(mapStateToProps, mapActionsCreators)(LocationsSettings)
+const connectedLocationsGeneral = connect(mapStateToProps, mapActionsCreators)(LocationsGeneral)
+
+export default StackNavigator(
+  {
+    LocationsGeneral: {screen: connectedLocationsGeneral},
+    LocationsAutocomplete: {screen: PlacesAutocomplete},
+  },
+  {headerMode: 'none'}
+)
