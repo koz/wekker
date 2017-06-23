@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {StyleSheet} from 'react-native'
-import {MapView, Location, Permissions} from 'expo'
+import {MapView} from 'expo'
 
 import {addDestination} from '../redux/actions'
 import {getFormattedAddress} from '../utils/fetcher'
@@ -51,32 +51,6 @@ class Map extends Component {
     this.handleDragEnd = this.handleDragEnd.bind(this)
   }
 
-  getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      return null
-    }
-
-    return Location.getCurrentPositionAsync({});
-  }
-
-  async componentWillMount() {
-    const initialPosition = await this.getLocationAsync()
-    if (initialPosition) {
-      this.setState({initialPosition})
-    } else {
-      this.setState({
-        error: 'Permission not granted'
-      })
-    }
-
-    this.watcher = await Location.watchPositionAsync({}, (position) => {
-      this.setState({
-        lastPosition: position,
-      })
-    })
-  }
-
   async handleDragEnd(event) {
     const {addDestination} = this.props
     const {coordinate: {longitude, latitude}} = event.nativeEvent
@@ -84,20 +58,12 @@ class Map extends Component {
     address && addDestination(latitude, longitude, address)
   }
 
-  componentWillUnmount() {
-    this.watcher.remove()
-  }
-
   render() {
-    const {destination} = this.props
-    const {initialPosition, lastPosition} = this.state
-    const initialCoords = initialPosition ? initialPosition.coords : null
-    const lastCoords = lastPosition ? lastPosition.coords : null
-    const actualPosition = (lastCoords || initialCoords)
-    const {latitude: actualLat, longitude: actualLng} = actualPosition || {}
+    const {destination, currentPosition} = this.props
+    const {lat: actualLat, lng: actualLng} = currentPosition || {}
     const {lat: destinationLat, lng: destinationLng} = destination || {}
-    const points = destination ? [actualPosition, {latitude: destinationLat, longitude: destinationLng}] : [actualPosition]
-    const {latitude, longitude, latitudeDelta, longitudeDelta} = points[0] ? getRegionContainingPoints(points) : {
+    const points = destination ? [currentPosition, {lat: destinationLat, lng: destinationLng}] : [currentPosition]
+    const {lat, lng, latDelta, lngDelta} = points[0] ? getRegionContainingPoints(points) : {
       latitude: actualLat || 37.78825,
       longitude: actualLng || -122.4324,
     }
@@ -108,10 +74,10 @@ class Map extends Component {
         customMapStyle={mapStyle}
         style={styles.map}
         region={{
-          latitude,
-          longitude,
-          latitudeDelta: latitudeDelta * 2 || 0.0043,
-          longitudeDelta: longitudeDelta * 2 || 0.0043,
+          latitude: lat,
+          longitude: lng,
+          latitudeDelta: latDelta * 2 || 0.0043,
+          longitudeDelta: lngDelta * 2 || 0.0043,
         }}
       >
         {
@@ -153,7 +119,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = ({wekker: {destination}}) => ({destination})
+const mapStateToProps = ({wekker: {destination, currentPosition}}) => ({destination, currentPosition})
 const mapDispatchToProps = dispatch => ({
   addDestination: (lat, lng, address) => dispatch(addDestination(lat, lng, address)),
 })

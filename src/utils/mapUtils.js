@@ -1,12 +1,14 @@
+import {getDistance} from 'geolib'
+
 export function getRegionContainingPoints(points) {
   let minX, maxX, minY, maxY
 
   points.map((point) => {
-    const {latitude, longitude} = point
-    minX = minX ? Math.min(minX, latitude) : latitude
-    maxX = maxX ? Math.max(maxX, latitude) : latitude
-    minY = minY ? Math.min(minY, longitude) : longitude
-    maxY = maxY ? Math.max(maxY, longitude) : longitude
+    const {lat, lng} = point
+    minX = minX ? Math.min(minX, lat) : lat
+    maxX = maxX ? Math.max(maxX, lat) : lat
+    minY = minY ? Math.min(minY, lng) : lng
+    maxY = maxY ? Math.max(maxY, lng) : lng
   })
 
   const midX = (minX + maxX) / 2
@@ -17,9 +19,13 @@ export function getRegionContainingPoints(points) {
   const deltaY = (maxY - minY)
 
   return {
-    latitude: midX,
-    longitude: midY,
-    latitudeDelta: deltaX,
-    longitudeDelta: deltaY,
+    lat: midX,
+    lng: midY,
+    latDelta: deltaX,
+    lngDelta: deltaY,
   }
+}
+
+export function getCoordsDistance(origin, destination) {
+  return getDistance(origin, destination, 100)
 }
