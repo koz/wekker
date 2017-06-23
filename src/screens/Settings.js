@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import Switch from 'react-native-switch-pro'
+import {StackNavigator} from 'react-navigation'
 import {
   View,
-  TouchableHighlight,
+  Text,
   Image,
   StyleSheet,
-  Switch,
   Dimensions,
-  Text
+  TouchableHighlight,
 } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import RadiusSettings from './RadiusSettings'
@@ -47,10 +48,8 @@ class GeneralSettings extends Component {
             <Switch
               style={styles.switch}
               value={this.state.isActive}
-              onValueChange={this.handleNotificationsChange}
-              tintColor={'#9986FC'}
-              thumbTintColor={'#FFFFFF'}
-              onTintColor={'#9986FC'}
+              onSyncPress={this.handleNotificationsChange}
+              backgroundActive="#9986FC"
             />
           </View>
         </View>

@@ -16,6 +16,7 @@
     "react-native": "github:exponent/react-native#sdk-14.0.0",
     "react-native-google-places-autocomplete": "^1.2.12",
     "react-native-slider": "^0.10.0",
+    "react-native-switch-pro": "^0.4.2",
     "react-navigation": "^1.0.0-beta.7",
     "react-redux": "^5.0.5",
     "redux": "^3.7.0",
