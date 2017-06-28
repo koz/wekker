@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   itemContainer: {
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 15,
+    marginRight: 15,
     borderBottomWidth: 1,
     borderColor: '#CCC'
   },
@@ -128,6 +128,9 @@ const styles = StyleSheet.create({
   settingsIcon: {
     width: 26,
     height: 26
+  },
+  title: {
+    fontSize: 18,
   }
 })
 

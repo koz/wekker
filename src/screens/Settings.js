@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   itemContainer: {
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 15,
+    marginRight: 15,
     borderBottomWidth: 1,
     borderColor: '#CCC'
   },
