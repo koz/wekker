@@ -26,7 +26,7 @@ const PickAddress = ({address, handlePress, placeholder}) => {
           >
             {
               address
-              ? `${address.slice(0, 30)}...`
+              ? `${address.slice(0, 25)}...`
               : placeholder
             }
           </Text>

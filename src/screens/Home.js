@@ -64,7 +64,7 @@ class Home extends Component {
               onPress={() => startTracking()}
               accessibilityLabel="Ativar alarme"
               buttonStyle={{
-                width: width * 0.8,
+                width: width * 0.9,
               }}
             >
               Ativar alarme
