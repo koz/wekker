@@ -65,7 +65,7 @@ class GeneralSettings extends Component {
           >
             <View style={styles.buttonWrapper}>
               <Text style={styles.buttonText}>
-                DEFINIR DESTINOS
+                DESTINOS FAVORITOS
               </Text>
               <Image
                 source={arrowIcon}
