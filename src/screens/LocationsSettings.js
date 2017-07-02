@@ -10,6 +10,7 @@ import {
   StatusBar,
   StyleSheet,
   TouchableHighlight,
+  Dimensions,
 } from 'react-native'
 
 import arrowIcon from '../assets/arrow.png'
@@ -49,6 +50,8 @@ class LocationsGeneral extends Component {
   }
 
   render() {
+    const {width, height} = Dimensions.get('window')
+
     return (
       <View style={styles.container}>
         <StatusBar hidden />
@@ -60,21 +63,26 @@ class LocationsGeneral extends Component {
                 onPress={() => this.handleLocationClick(i)}
                 style={styles.button}
               >
-                <View style={styles.buttonWrapper}>
-                  <View>
-                    <Text style={styles.buttonText}>
+                <View style={styles.locationWrapper}>
+                  <View style={styles.buttonWrapper}>
+                    <Text style={styles.title}>
                       { l.title.toUpperCase() }
                     </Text>
-                    { l.value ? (
-                      <Text>
-                        { l.value }
-                      </Text>
-                    ) : null }
+                    <Animated.Image
+                      style={styles.arrowIcon}
+                      source={arrowIcon}
+                    />
                   </View>
-                  <Animated.Image
-                    style={styles.arrowIcon}
-                    source={arrowIcon}
-                  />
+                  { l.value ? (
+                    <Text
+                      style={{
+                        width: width * 0.8,
+                        color: 'gray'
+                      }}
+                    >
+                      { l.value }
+                    </Text>
+                  ) : null }
                 </View>
               </TouchableHighlight>
             </View>
@@ -93,8 +101,8 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   itemContainer: {
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 15,
+    marginRight: 15,
     borderBottomWidth: 1,
     borderColor: '#CCC'
   },
@@ -120,6 +128,9 @@ const styles = StyleSheet.create({
   settingsIcon: {
     width: 26,
     height: 26
+  },
+  title: {
+    fontSize: 18,
   }
 })
 
