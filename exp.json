@@ -1,7 +1,7 @@
 {
-  "name": "Weeker",
+  "name": "Wekker",
   "description": "App to use alarms to wake up before a destination",
-  "slug": "weeker",
+  "slug": "wekker",
   "sdkVersion": "16.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
