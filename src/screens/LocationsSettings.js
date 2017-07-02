@@ -32,11 +32,15 @@ class LocationsGeneral extends Component {
   }
 
   handleLocationClick = (index) => {
-    const { navigate } = this.props.navigation
+    const {
+      navigation: {navigate},
+      setLocations,
+      locations,
+     } = this.props
     navigate('LocationsAutocomplete', {
-      handleSelect: (data, details) => (
-        this.props.setLocations(this.props.locations.map((l, i) => {
-          if (i === index) return { ...l, value: details.formatted_address }
+      handleSelect: (data, {formatted_address, geometry}) => (
+        setLocations(locations.map((l, i) => {
+          if (i === index) return { ...l, value: formatted_address, geometry }
           return { ...l }
         }))
       )
