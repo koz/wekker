@@ -2,7 +2,7 @@
   "name": "Weeker",
   "description": "App to use alarms to wake up before a destination",
   "slug": "weeker",
-  "sdkVersion": "14.0.0",
+  "sdkVersion": "16.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",
