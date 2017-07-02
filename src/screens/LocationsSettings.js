@@ -43,7 +43,8 @@ class LocationsGeneral extends Component {
           if (i === index) return { ...l, value: formatted_address, geometry }
           return { ...l }
         }))
-      )
+      ),
+      showPredefinedPlaces: false,
     })
   }
 

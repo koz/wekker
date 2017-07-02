@@ -21,6 +21,7 @@ class PlacesAutocomplete extends Component {
         const {lng, lat} = location
         addDestination(lat, lng, address)
       },
+      showPredefinedPlaces: true,
     })
   }
 

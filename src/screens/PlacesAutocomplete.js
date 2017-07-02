@@ -9,12 +9,28 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from 'react-native'
+import {connect} from 'react-redux'
+
+function getPredefinedLocations(locations) {
+  const predefined = locations.reduce((accum, {title, value, geometry}) => {
+    if (geometry) {
+      accum.push({
+        description: title,
+        geometry,
+        formatted_address: value,
+      })
+    }
+    return accum
+  }, [])
+  return predefined
+}
 
 class PlacesAutocomplete extends Component {
   constructor (props) {
     super(props)
+    const {locations} = props
     this.state = {
-      searchValue: ''
+      predefinedPlaces: getPredefinedLocations(locations),
     }
   }
 
@@ -28,6 +44,9 @@ class PlacesAutocomplete extends Component {
   }
 
   render () {
+    const {predefinedPlaces} = this.state
+    const {navigation: {state: {params: {showPredefinedPlaces}}}} = this.props
+
     return (
       <View style={styles.container}>
         <StatusBar hidden />
@@ -53,6 +72,7 @@ class PlacesAutocomplete extends Component {
             textInputContainer: styles.textInputContainer,
             listView: styles.listView,
             row: styles.row,
+            predefinedPlacesDescription: styles.predefinedPlaces
           }}
           ref = {(instance) => { this.GooglePlacesRef = instance }}
           renderRightButton={() => (
@@ -69,6 +89,8 @@ class PlacesAutocomplete extends Component {
               />
             </TouchableHighlight>
           )}
+          predefinedPlacesAlwaysVisible={true}
+          predefinedPlaces={showPredefinedPlaces ? predefinedPlaces : []}
         />
       </View>
     )
@@ -112,7 +134,12 @@ const styles = StyleSheet.create({
   clearImage: {
     height: 15,
     width: 15,
-  }
+  },
+  predefinedPlaces: {
+    fontWeight: 'bold',
+  },
 })
 
-export default PlacesAutocomplete
+const mapStateToProps = ({wekker: {locations}}) => ({locations})
+
+export default connect(mapStateToProps)(PlacesAutocomplete)
